@@ -1,0 +1,59 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+
+
+<dom-module id="image-component">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-button{
+        border-radius: 8px;
+        background-color: blue;
+      }
+    </style>
+    <div>
+      <paper-input id="imageUrl"></paper-input>
+      <paper-button on-tap="show">Visualizar</paper-button>
+    </div>
+    <div>
+      <image id="showImage" src="" />
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `image-component`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ImageComponent extends Polymer.Element {
+      static get is() { return 'image-component'; }
+      static get properties() {
+        return {
+          image: {
+            type: String,
+            value: '',
+            observer: "_viewImage"
+          }
+        };
+      }
+      _viewImage(){
+        this.set('image',this.image);
+      }
+      show(){
+        const url = this.$.imageUrl;
+        const imagee = this.$.showImage;
+        imagee.src = url.value;
+
+      }
+    }
+
+    window.customElements.define(ImageComponent.is, ImageComponent);
+  </script>
+</dom-module>
